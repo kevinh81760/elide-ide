@@ -1,24 +1,97 @@
-# Logs
-logs
+# -------------------------------------------------
+# LOGS
+# -------------------------------------------------
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+bun-error.log
 
-node_modules
-dist
-dist-ssr
+# -------------------------------------------------
+# DEPENDENCIES / PACKAGE MANAGERS
+# -------------------------------------------------
+node_modules/
+bun.lockb
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# -------------------------------------------------
+# BUILD OUTPUT (FRONTEND)
+# -------------------------------------------------
+dist/
+build/
+dist-ssr/
+.vite/
+.vite-deps/
+
+# React specific
 *.local
+*.cache
+*.parcel-cache
+*.eslintcache
 
-# Editor directories and files
+# -------------------------------------------------
+# TAURI / RUST BACKEND
+# -------------------------------------------------
+src-tauri/target/
+src-tauri/debug/
+src-tauri/release/
+src-tauri/Cargo.lock
+
+# Tauri builds
+.tauli-build/
+tauri-build/
+
+# Rust artifacts
+*.pdb
+*.dSYM/
+*.rlib
+*.rmeta
+
+# Rust incremental compilation
+target/
+
+# -------------------------------------------------
+# MONACO EDITOR
+# -------------------------------------------------
+# Monaco workers, sourcemaps, and build outputs
+*.map
+*.worker.js
+*.worker.js.map
+
+# -------------------------------------------------
+# OS ARTIFACTS
+# -------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------------------------------
+# EDITOR SETTINGS
+# -------------------------------------------------
+
+# VS Code
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/settings.json
+
+# JetBrains
+.idea/
+*.iml
+
+# Visual Studio garbage
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# -------------------------------------------------
+# ENV / SECRETS
+# -------------------------------------------------
+.env
+.env.*
+*.env
