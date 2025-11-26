@@ -67,8 +67,8 @@ export function FileTree({
     <div>
       <div
         className={cn(
-          "flex items-center gap-1 px-2 py-1 text-sm cursor-pointer hover:bg-sidebar-accent/50 rounded-sm transition-colors",
-          isSelected && "bg-sidebar-accent text-sidebar-accent-foreground",
+          "flex items-center gap-1 px-2 py-1 text-sm cursor-pointer hover:bg-sidebar-accent rounded-sm transition-colors text-sidebar-foreground",
+          isSelected && "bg-sidebar-accent font-medium",
           "select-none"
         )}
         style={{ paddingLeft: `${level * 12 + 8}px` }}
@@ -82,14 +82,14 @@ export function FileTree({
               <ChevronRight className="h-3 w-3 mr-1" />
             )}
             {isExpanded ? (
-              <FolderOpen className="h-4 w-4 mr-2 text-blue-500" />
+              <FolderOpen className="h-4 w-4 mr-2" style={{ color: '#3B82F6' }} />
             ) : (
-              <Folder className="h-4 w-4 mr-2 text-blue-500" />
+              <Folder className="h-4 w-4 mr-2" style={{ color: '#3B82F6' }} />
             )}
           </div>
         )}
         {node.type === "file" && (
-          <File className="h-4 w-4 mr-2 ml-4 text-gray-500" />
+          <File className="h-4 w-4 mr-2 ml-4 text-gray-600" />
         )}
         <span className="truncate">{node.name}</span>
       </div>

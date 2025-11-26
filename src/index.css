@@ -1,99 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  /* Light mode colors */
-  --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(10% 0 0);
-  --color-card: oklch(100% 0 0);
-  --color-card-foreground: oklch(10% 0 0);
+  /* Light theme colors - forced for entire app */
+  --color-background: oklch(100% 0 0); /* Pure white */
+  --color-foreground: oklch(20% 0 0); /* Near black for readability */
+  --color-card: oklch(100% 0 0); /* White */
+  --color-card-foreground: oklch(20% 0 0); /* Near black */
   --color-popover: oklch(100% 0 0);
-  --color-popover-foreground: oklch(10% 0 0);
+  --color-popover-foreground: oklch(20% 0 0);
   --color-primary: oklch(25% 0 0);
   --color-primary-foreground: oklch(98% 0 0);
   --color-secondary: oklch(96% 0 0);
-  --color-secondary-foreground: oklch(25% 0 0);
-  --color-muted: oklch(96% 0 0);
-  --color-muted-foreground: oklch(50% 0 0);
+  --color-secondary-foreground: oklch(20% 0 0);
+  --color-muted: oklch(96% 0 0); /* Light gray */
+  --color-muted-foreground: oklch(45% 0 0); /* Medium gray */
   --color-accent: oklch(96% 0 0);
-  --color-accent-foreground: oklch(25% 0 0);
+  --color-accent-foreground: oklch(20% 0 0);
   --color-destructive: oklch(60% 0.2 25);
   --color-destructive-foreground: oklch(98% 0 0);
-  --color-border: oklch(91% 0 0);
-  --color-input: oklch(91% 0 0);
-  --color-ring: oklch(10% 0 0);
+  --color-border: oklch(90% 0 0); /* Light gray border */
+  --color-input: oklch(98% 0 0);
+  --color-ring: oklch(60% 0.15 250); /* Light blue ring */
   
-  /* IDE specific colors */
-  --color-sidebar: oklch(18% 0.02 240);
-  --color-sidebar-foreground: oklch(85% 0 0);
-  --color-sidebar-border: oklch(15% 0.02 240);
-  --color-sidebar-accent: oklch(23% 0.02 240);
-  --color-sidebar-accent-foreground: oklch(95% 0 0);
+  /* IDE specific colors - light theme */
+  --color-sidebar: oklch(98% 0 0); /* Very light gray */
+  --color-sidebar-foreground: oklch(20% 0 0); /* Near black */
+  --color-sidebar-border: oklch(90% 0 0); /* Light gray */
+  --color-sidebar-accent: oklch(95% 0 0); /* Slightly darker on hover */
+  --color-sidebar-accent-foreground: oklch(15% 0 0); /* Dark text */
 
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
   --radius-sm: calc(0.5rem - 4px);
-}
-
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: oklch(10% 0 0);
-    --color-foreground: oklch(98% 0 0);
-    --color-card: oklch(10% 0 0);
-    --color-card-foreground: oklch(98% 0 0);
-    --color-popover: oklch(10% 0 0);
-    --color-popover-foreground: oklch(98% 0 0);
-    --color-primary: oklch(98% 0 0);
-    --color-primary-foreground: oklch(25% 0 0);
-    --color-secondary: oklch(17% 0 0);
-    --color-secondary-foreground: oklch(98% 0 0);
-    --color-muted: oklch(17% 0 0);
-    --color-muted-foreground: oklch(65% 0 0);
-    --color-accent: oklch(17% 0 0);
-    --color-accent-foreground: oklch(98% 0 0);
-    --color-destructive: oklch(40% 0.2 25);
-    --color-destructive-foreground: oklch(98% 0 0);
-    --color-border: oklch(17% 0 0);
-    --color-input: oklch(17% 0 0);
-    --color-ring: oklch(83% 0 0);
-    
-    /* IDE specific colors - dark mode */
-    --color-sidebar: oklch(12% 0.02 240);
-    --color-sidebar-foreground: oklch(85% 0 0);
-    --color-sidebar-border: oklch(8% 0.02 240);
-    --color-sidebar-accent: oklch(18% 0.02 240);
-    --color-sidebar-accent-foreground: oklch(95% 0 0);
-  }
-}
-
-.dark {
-  @theme {
-    --color-background: oklch(10% 0 0);
-    --color-foreground: oklch(98% 0 0);
-    --color-card: oklch(10% 0 0);
-    --color-card-foreground: oklch(98% 0 0);
-    --color-popover: oklch(10% 0 0);
-    --color-popover-foreground: oklch(98% 0 0);
-    --color-primary: oklch(98% 0 0);
-    --color-primary-foreground: oklch(25% 0 0);
-    --color-secondary: oklch(17% 0 0);
-    --color-secondary-foreground: oklch(98% 0 0);
-    --color-muted: oklch(17% 0 0);
-    --color-muted-foreground: oklch(65% 0 0);
-    --color-accent: oklch(17% 0 0);
-    --color-accent-foreground: oklch(98% 0 0);
-    --color-destructive: oklch(40% 0.2 25);
-    --color-destructive-foreground: oklch(98% 0 0);
-    --color-border: oklch(17% 0 0);
-    --color-input: oklch(17% 0 0);
-    --color-ring: oklch(83% 0 0);
-    
-    /* IDE specific colors - dark mode */
-    --color-sidebar: oklch(12% 0.02 240);
-    --color-sidebar-foreground: oklch(85% 0 0);
-    --color-sidebar-border: oklch(8% 0.02 240);
-    --color-sidebar-accent: oklch(18% 0.02 240);
-    --color-sidebar-accent-foreground: oklch(95% 0 0);
-  }
 }
 
 /* Custom scrollbar styles for IDE */
@@ -117,10 +55,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-muted);
+  background: oklch(85% 0 0); /* Light gray thumb */
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted-foreground);
+  background: oklch(70% 0 0); /* Darker gray on hover */
 }
