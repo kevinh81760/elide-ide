@@ -12,9 +12,12 @@
   "app": {
     "windows": [
       {
-        "title": "elide-ide",
-        "width": 800,
-        "height": 600
+        "title": "Elide IDE",
+        "width": 1400,
+        "height": 900,
+        "fullscreen": false,
+        "resizable": true,
+        "maximized": false
       }
     ],
     "security": {

@@ -1,15 +1,17 @@
-import { FilePlus, FolderPlus, ChevronsDownUp } from "lucide-react";
+import { FilePlus, FolderPlus, ChevronsDownUp, FolderOpen } from "lucide-react";
 
 interface SidebarHeaderProps {
   onCreateFile: () => void;
   onCreateFolder: () => void;
   onCollapseAll: () => void;
+  onOpenFolder: () => void;
 }
 
 export function SidebarHeader({
   onCreateFile,
   onCreateFolder,
   onCollapseAll,
+  onOpenFolder,
 }: SidebarHeaderProps) {
   return (
     <div className="flex items-center justify-between p-3 border-b border-sidebar-border bg-sidebar">
@@ -18,6 +20,15 @@ export function SidebarHeader({
       </h2>
       
       <div className="flex items-center gap-1">
+        <button
+          onClick={onOpenFolder}
+          className="p-1.5 rounded hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+          title="Open Folder"
+          aria-label="Open Folder"
+        >
+          <FolderOpen className="h-4 w-4" />
+        </button>
+        
         <button
           onClick={onCreateFile}
           className="p-1.5 rounded hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"

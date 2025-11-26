@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { open } from "@tauri-apps/plugin-dialog";
 import { buildFileTree } from "@/lib/tauri-fs";
 import { useEditorStore } from "@/lib/stores/useEditorStore";
 import { useFileTreeStore } from "@/lib/stores/useFileTreeStore";
@@ -19,6 +20,8 @@ export default function IDELayout() {
   const {
     fileTree,
     setFileTree,
+    currentWorkspacePath,
+    setWorkspacePath,
     createNewFile,
     createNewFolder,
     collapseAllFolders,
@@ -28,18 +31,58 @@ export default function IDELayout() {
 
   useEffect(() => {
     const loadWorkspace = async () => {
-      const defaultPath = "/Users";
-
-      try {
-        const tree = await buildFileTree(defaultPath, "Workspace", 2);
-        setFileTree(tree);
-      } catch (error) {
-        console.error("Error loading workspace:", error);
+      // Load the last opened workspace if available
+      if (currentWorkspacePath) {
+        try {
+          const folderName = currentWorkspacePath.split("/").pop() || "Workspace";
+          const tree = await buildFileTree(currentWorkspacePath, folderName, 2);
+          setFileTree(tree);
+          console.log("Restored workspace:", currentWorkspacePath);
+        } catch (error) {
+          console.error("Error restoring workspace:", error);
+          // If we can't load the saved workspace, clear it
+          setWorkspacePath(null);
+        }
       }
     };
 
     loadWorkspace();
-  }, [setFileTree]);
+  }, [currentWorkspacePath, setFileTree, setWorkspacePath]);
+
+  const handleOpenFolder = async () => {
+    console.log("🔵 Folder open button clicked!");
+    
+    try {
+      console.log("🔵 Calling dialog.open()...");
+      const selected = await open({
+        directory: true,
+        multiple: false,
+        title: "Open Folder",
+      });
+
+      console.log("🔵 Dialog result:", selected);
+
+      if (selected && typeof selected === "string") {
+        console.log("🟢 Opening folder:", selected);
+        // Save the workspace path
+        setWorkspacePath(selected);
+        // Extract folder name from path
+        const folderName = selected.split("/").pop() || "Workspace";
+        console.log("🔵 Building file tree for:", folderName);
+        const tree = await buildFileTree(selected, folderName, 2);
+        console.log("🟢 File tree built successfully:", tree);
+        setFileTree(tree);
+      } else {
+        console.log("🟡 User cancelled folder selection or invalid result");
+      }
+    } catch (error) {
+      console.error("🔴 Error opening folder:", error);
+      console.error("🔴 Error details:", {
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
+    }
+  };
 
   const handleFileSelect = async (path: string, name: string) => {
     await openFile(path, name);
@@ -52,6 +95,7 @@ export default function IDELayout() {
       {/* Resizable Sidebar with File Explorer */}
       <ResizableSidebar>
         <SidebarHeader
+          onOpenFolder={handleOpenFolder}
           onCreateFile={createNewFile}
           onCreateFolder={createNewFolder}
           onCollapseAll={collapseAllFolders}
