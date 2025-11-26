@@ -9,6 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { FileNode } from "@/lib/file-types";
 import { loadFolderChildren } from "@/lib/tauri-fs";
+import { useFileTreeStore } from "@/lib/stores/useFileTreeStore";
 
 interface FileTreeProps {
   node: FileNode;
@@ -23,9 +24,12 @@ export function FileTree({
   selectedFile,
   onFileSelect,
 }: FileTreeProps) {
-  const [isExpanded, setIsExpanded] = useState(level < 2); // Auto-expand first two levels
+  const { expandedFolders, toggleFolder } = useFileTreeStore();
   const [children, setChildren] = useState<FileNode[]>(node.children || []);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Check if this folder is expanded (from store)
+  const isExpanded = expandedFolders.has(node.path) || level < 2;
 
   // Load children when expanded for the first time
   useEffect(() => {
@@ -55,7 +59,7 @@ export function FileTree({
 
   const handleClick = () => {
     if (node.type === "folder") {
-      setIsExpanded(!isExpanded);
+      toggleFolder(node.path);
     } else {
       onFileSelect(node.path, node.name);
     }
